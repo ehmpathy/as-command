@@ -1,5 +1,5 @@
 {
-  "name": "as-command",
+  "name": "@ehmpathy/as-command",
   "author": "ehmpathy",
   "description": "easily create commands within a pit-of-success",
   "version": "1.0.0",
