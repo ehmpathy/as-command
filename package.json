@@ -14,6 +14,7 @@
     "UniDuration"
   ],
   "bugs": "https://github.com/ehmpathy/as-command/issues",
+  "license": "MIT",
   "main": "dist/index.js",
   "engines": {
     "node": ">=8.0.0"
@@ -53,17 +54,17 @@
     "date-fns": "3.6.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.6.7",
+    "@commitlint/cli": "19.3.0",
     "@commitlint/config-conventional": "13.1.0",
-    "@trivago/prettier-plugin-sort-imports": "2.0.4",
+    "@trivago/prettier-plugin-sort-imports": "4.3.0",
     "@tsconfig/node-lts-strictest": "18.12.1",
     "@types/jest": "29.2.4",
     "@typescript-eslint/eslint-plugin": "7.8.0",
     "@typescript-eslint/parser": "7.8.0",
     "core-js": "3.26.1",
     "cz-conventional-changelog": "3.3.0",
-    "declapract": "^0.11.2",
-    "declapract-typescript-ehmpathy": "^0.31.6",
+    "declapract": "0.11.5",
+    "declapract-typescript-ehmpathy": "0.33.10",
     "depcheck": "1.4.3",
     "eslint": "8.56.0",
     "eslint-config-airbnb-typescript": "18.0.0",
@@ -82,6 +83,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "license": "MIT"
+  }
 }
