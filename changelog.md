@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/ehmpathy/as-command/compare/v1.0.1...v1.0.2) (2024-07-27)
+
+
+### Bug Fixes
+
+* **practs:** bump practs to latest best ([f9e8c03](https://github.com/ehmpathy/as-command/commit/f9e8c03beda6c1c235030ee01cbf77e894ccff7a))
+
 ## [1.0.1](https://github.com/ehmpathy/as-command/compare/v1.0.0...v1.0.1) (2024-05-26)
 
 
