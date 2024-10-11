@@ -7,6 +7,19 @@ import type { LogMethods } from 'simple-leveled-log-methods';
 const bottleneckFileLog = new Bottleneck({ maxConcurrency: 1 });
 
 /**
+ * context provided by the command
+ */
+export interface CommandContext {
+  log: LogMethods;
+  out: {
+    write: (file: {
+      name: string;
+      data: Parameters<typeof fs.writeFile>[1];
+    }) => Promise<{ path: string }>;
+  };
+}
+
+/**
  * converts any function into a pit-of-success command
  *
  * features
@@ -27,18 +40,7 @@ export const asCommand =
       log: LogMethods;
       dir: string;
     },
-    logic: (
-      input: I,
-      control: {
-        log: LogMethods;
-        out: {
-          write: (file: {
-            name: string;
-            data: Parameters<typeof fs.writeFile>[1];
-          }) => Promise<{ path: string }>;
-        };
-      },
-    ) => Promise<O>,
+    logic: (input: I, context: CommandContext) => Promise<O>,
   ) =>
   async (input: I): Promise<O> => {
     const calledAt = new Date();
