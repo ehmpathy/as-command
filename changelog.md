@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/ehmpathy/as-command/compare/v1.0.2...v1.0.3) (2024-10-11)
+
+
+### Bug Fixes
+
+* **types:** expose CommandContext shape ([2eea181](https://github.com/ehmpathy/as-command/commit/2eea18132e814e857aa14a016b0f98ba5cbd2670))
+
 ## [1.0.2](https://github.com/ehmpathy/as-command/compare/v1.0.1...v1.0.2) (2024-07-27)
 
 
