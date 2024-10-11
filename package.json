@@ -2,7 +2,7 @@
   "name": "@ehmpathy/as-command",
   "author": "ehmpathy",
   "description": "easily create commands within a pit-of-success",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": "ehmpathy/as-command",
   "homepage": "https://github.com/ehmpathy/as-command",
   "keywords": [
