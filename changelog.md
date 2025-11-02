@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/ehmpathy/as-command/compare/v1.0.4...v1.0.5) (2025-11-02)
+
+
+### Bug Fixes
+
+* **docs:** update readme examples ([dfc9d7b](https://github.com/ehmpathy/as-command/commit/dfc9d7b5f697f34d88eda3a438908c8eb3a25661))
+
 ## [1.0.4](https://github.com/ehmpathy/as-command/compare/v1.0.3...v1.0.4) (2025-11-02)
 
 
