@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.4](https://github.com/ehmpathy/as-command/compare/v1.0.3...v1.0.4) (2025-11-02)
+
+
+### Bug Fixes
+
+* **cicd:** bump latest runners ([c97ba2e](https://github.com/ehmpathy/as-command/commit/c97ba2e7befe4cdb1cf3787446390fde2d0f0cab))
+* **out:** ensure context.out.write mkdirs recursively ([0a486d7](https://github.com/ehmpathy/as-command/commit/0a486d7258547090b14257066783ac1380ef481a))
+
 ## [1.0.3](https://github.com/ehmpathy/as-command/compare/v1.0.2...v1.0.3) (2024-10-11)
 
 
