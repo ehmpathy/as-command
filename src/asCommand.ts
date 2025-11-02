@@ -2,6 +2,7 @@ import Bottleneck from 'bottleneck';
 import * as crypto from 'crypto';
 import { format } from 'date-fns';
 import * as fs from 'fs/promises';
+import { dirname } from 'path';
 import type { LogMethods } from 'simple-leveled-log-methods';
 
 const bottleneckFileLog = new Bottleneck({ maxConcurrency: 1 });
@@ -50,10 +51,10 @@ export const asCommand =
       .createHash('sha256')
       .update(JSON.stringify(input))
       .digest('hex');
-    const logFileDirectory = `${options.dir}/__tmp__/${options.stage}/${options.name}`;
-    const logFilePrefix = `${format(calledAt, 'yyyyMMdd.HHmmss')}.${inputHash}`;
-    const logFileName = `${logFilePrefix}.log.json`;
-    const outFileName = `${logFilePrefix}.out.json`;
+    const runId = `${format(calledAt, 'yyyyMMdd.HHmmss')}.${inputHash}`;
+    const logFileDirectory = `${options.dir}/__tmp__/${options.stage}/${options.name}/${runId}`;
+    const logFileName = `log.json`;
+    const outFileName = `out.json`;
 
     // find or create the temp log table
     await fs.mkdir(logFileDirectory, {
@@ -100,7 +101,8 @@ export const asCommand =
         log,
         out: {
           write: async ({ name, data }) => {
-            const path = `${logFileDirectory}/${logFilePrefix}.out.${name}`;
+            const path = `${logFileDirectory}/${name}`;
+            await fs.mkdir(dirname(path), { recursive: true });
             await fs.writeFile(path, data);
             return { path };
           },
