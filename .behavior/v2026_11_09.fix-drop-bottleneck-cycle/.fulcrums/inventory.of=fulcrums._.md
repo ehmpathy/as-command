@@ -1,0 +1,12 @@
+# inventory.of=fulcrums
+
+| case | title | rework | status | confidence |
+|---|---|---|---|---|
+| [`case=F01-one-global-chain-over-per-file`](./inventory.of=fulcrums.case=F01-one-global-chain-over-per-file.md) | one module-level chain serializes every file-log write, across commands; a per-run chain is offered for a re-rule | clean | reopened: holds global until re-ruled | 70% |
+| [`case=F02-brackets-ride-the-chain`](./inventory.of=fulcrums.case=F02-brackets-ride-the-chain.md) | the `[` and `]` appends go through the chain too | clean | ruled: taken | 92% |
+| [`case=F03-ci-installs-via-pnpm`](./inventory.of=fulcrums.case=F03-ci-installs-via-pnpm.md) | ci installs via pnpm: the practice's `.install.yml` copied verbatim; `.publish-npm.yml` drops its `npm ci` fallback; the full per-practice apply waits on a pave | clean | ruled: taken, narrowed in execution | 78% |
+| [`case=F04-depcheck-ignores-merge-not-lint-practice`](./inventory.of=fulcrums.case=F04-depcheck-ignores-merge-not-lint-practice.md) | depcheck: merge the rhachet ignores + fix the config path; do not apply the full lint practice | clean | open | 88% |
+| [`case=F05-practice-owned-files-out-of-stone-scope`](./inventory.of=fulcrums.case=F05-practice-owned-files-out-of-stone-scope.md) | concerns on boot-born practice files (`.husky/*`, `.agent/.actors/**`) route upstream, not hand-edited here | clean | open | 85% |
+| [`case=F06-boot-migration-rides-the-fix-pr`](./inventory.of=fulcrums.case=F06-boot-migration-rides-the-fix-pr.md) | the boot migration and the #7/#8 fix ship in one pr, as separate commits (landed at file grain: fix + deps · repo kit · route) | clean | open | 80% |
+| [`case=F07-log-json-keeps-mains-format`](./inventory.of=fulcrums.case=F07-log-json-keeps-mains-format.md) | `log.json` keeps main's byte format (a comma before `]`, a late entry after it); valid json is its own followup | clean | open | 88% |
+| [`case=F08-console-gets-the-total-render`](./inventory.of=fulcrums.case=F08-console-gets-the-total-render.md) | the console gets a json-safe copy of each entry's metadata, the same render as `log.json`, so a logger that stringifies never loses a message nor throws | clean | open | 85% |
