@@ -64,8 +64,7 @@
     "date-fns": "3.6.0",
     "domain-objects": "0.34.0",
     "helpful-errors": "1.7.5",
-    "type-fns": "1.21.4",
-    "with-bottleneck": "0.1.2"
+    "type-fns": "1.21.4"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",

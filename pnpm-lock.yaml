@@ -20,9 +20,6 @@ importers:
       type-fns:
         specifier: 1.21.4
         version: 1.21.4
-      with-bottleneck:
-        specifier: 0.1.2
-        version: 0.1.2
     devDependencies:
       '@biomejs/biome':
         specifier: 2.3.8
