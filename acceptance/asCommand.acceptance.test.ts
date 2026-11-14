@@ -775,7 +775,9 @@ describe('as-command (acceptance)', () => {
             expect(
               asLogSnapshot({ contents: logContents, testDir }),
             ).toMatchSnapshot('log.json');
-            expect(lines.join('\n')).toMatchSnapshot('console');
+            expect(
+              asLogSnapshot({ contents: lines.join('\n'), testDir }),
+            ).toMatchSnapshot('console');
           },
         );
       },

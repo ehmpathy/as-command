@@ -4,7 +4,7 @@ exports[`as-command (acceptance) given: the built package an adopter installs wh
 "{"level":"info","message":"input","metadata":{"input":{}}}
 {"level":"info","message":"job.seen","metadata":{"job":{"status":"queued"}}}
 {"level":"info","message":"output.result","metadata":{"output":{"ok":true}}}
-{"level":"info","message":"output.files","metadata":{"log":"/home/camper/git/ehmpathy/_worktrees/as-command.beav.fix-drop-bottleneck-cycle/acceptance/.temp/__tmp__/test/journey-mutate/20261114.062249.44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a/log.json","out":"/home/camper/git/ehmpathy/_worktrees/as-command.beav.fix-drop-bottleneck-cycle/acceptance/.temp/__tmp__/test/journey-mutate/20261114.062249.44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a/out.json"}}"
+{"level":"info","message":"output.files","metadata":{"log":"<testDir>/__tmp__/test/journey-mutate/<runId>/log.json","out":"<testDir>/__tmp__/test/journey-mutate/<runId>/out.json"}}"
 `;
 
 exports[`as-command (acceptance) given: the built package an adopter installs when: a command fires log calls without await, then mutates their metadata (cell 31) then: log.json and the console each hold the metadata as it was at the call: log.json 1`] = `
