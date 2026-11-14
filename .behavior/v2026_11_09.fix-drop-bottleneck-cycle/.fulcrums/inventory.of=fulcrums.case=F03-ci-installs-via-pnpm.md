@@ -44,4 +44,18 @@ no paved path runs a per-practice apply (`npx declapract apply` declined; `rhx d
 
 confidence 78%: a pnpm `node_modules` restored from cache is untested on this repo's runners until the pr's ci runs. the later per-practice apply overwrites both files with the practice form, so naught here drifts from it.
 
-open: the full `cicd-common` + `cicd-package` apply, behind the dispatched pave
+## as closed — the practice workflows, copied verbatim
+
+the pr's first ci run (#9) failed every job before a step ran: the org requires every action pinned to a full commit sha, and `.test.yml` / `review.yml` still named `@v3` / `@v5` tags. so the narrowed form could not go green.
+
+every practice check on these files is `FileCheckType.EQUALS` with no declapract variable, so a verbatim copy writes the same bytes the apply would. copied with `rhx cpsafe`, from `declapract-typescript-ehmpathy@0.50.0`:
+
+- `cicd-common`: `.test.yml`, `test.yml`, `release.yml`, `review.yml`, `report-slow-tests.sh`, `.github/actions/please-release/`, `.github/actions/test-shards-setup/`
+- `cicd-package`: `publish.yml`, `.publish-npm.yml`
+- not copied: `provision.yml` and its `.declastruct.yml` — they plan `provision/github.repo/resources.ts` on every pr, a file this repo lacks (the provision practice owns it), so they would add a red check, not remove one
+
+proof: `diff -rq` against the practice dirs shows no file differs; no `uses:` names an unpinned tag.
+
+🟡 caveat: the practice's `.publish-npm.yml` publishes via npm oidc (`--provenance`). the first tag after merge needs npm trusted-publisher setup for this package, if absent.
+
+status: closed in bounds — no npx, no blanket stage. the dispatched per-practice pave stays useful for the next repo
