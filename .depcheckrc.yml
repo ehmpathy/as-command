@@ -3,11 +3,28 @@ ignores:
   - declapract
   - declapract-typescript-ehmpathy
   - '@commitlint/config-conventional'
-  - '@trivago/prettier-plugin-sort-imports'
-  - '@tsconfig/node-lts-strictest'
   - serverless-prune-plugin
-  - core-js
-  - ts-jest
-  - ts-node
   - husky
   - if-env
+  - "@src/*"
+  - "@src/.*"
+  - rhachet*
+  - declastruct-aws
+  - declastruct-unix-network
+  - "@tsconfig/node20"
+  - "@tsconfig/strictest"
+  - "@biomejs/biome"
+  - esbuild-register
+  - "@swc/core"
+  - "@swc/jest"
+  - tsx
+  - tsc-alias
+  - yalc
+  - test-fns
+  - type-fns
+  - yaml
+ignorePatterns:
+  - .agent/.actors
+  - .claude
+  - .agent/repo=*
+  - "!.agent/repo=.this"

@@ -1,0 +1,17 @@
+# dpdm exclude patterns — each entry is joined with | into a single --exclude regex.
+#
+# an empty `exclude: []` means dpdm checks every file for cycles, node_modules included. this is
+# the org policy `rule.forbid.dpdm-exclude-change`: we check dependencies too, because a prod-dep
+# cycle ships to consumers.
+#
+# when an entry is allowed:
+# - a type-only cycle: never. --transform erases type imports before analysis, so none is owed
+# - a test file: never. the '!(*.test).ts' glob already drops test files
+# - a require cycle inside a third-party devDependency: allowed, one entry per package, each with
+#   a comment that cites the cycle and the upstream issue
+# - a require cycle inside a prod dependency: never. it ships to consumers — dispatch the fix
+#   upstream or replace the dependency
+#
+# an entry of `node_modules` (or dpdm's own `/node_modules/` default) disables the check across
+# every consumer repo, and the declapract check rejects it.
+exclude: []
