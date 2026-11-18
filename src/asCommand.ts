@@ -1,11 +1,12 @@
-import Bottleneck from 'bottleneck';
 import * as crypto from 'crypto';
 import { format } from 'date-fns';
 import * as fs from 'fs/promises';
 import { dirname } from 'path';
 import type { LogMethods } from 'simple-leveled-log-methods';
+import { genBottleneck } from 'with-bottleneck';
 
-const bottleneckFileLog = new Bottleneck({ maxConcurrency: 1 });
+// serialize log file appends, so concurrent log calls never interleave their json entries
+const bottleneckFileLog = genBottleneck({ concurrency: 1 });
 
 /**
  * context provided by the command

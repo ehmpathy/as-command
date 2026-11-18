@@ -1,9 +1,9 @@
-import { existsSync } from 'node:fs';
-import { readFile, readdir } from 'node:fs/promises';
-import { resolve } from 'node:path';
-import { LogMethods } from 'simple-leveled-log-methods';
-import { given, when, then, getError } from 'test-fns';
+import type { LogMethods } from 'simple-leveled-log-methods';
+import { getError, given, then, when } from 'test-fns';
 
+import { existsSync } from 'node:fs';
+import { readdir, readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { asCommand } from './asCommand';
 
 describe('asCommand (integration)', () => {
