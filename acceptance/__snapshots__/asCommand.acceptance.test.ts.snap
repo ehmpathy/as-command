@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command fires log calls without await, then mutates their metadata (cell 31) then: log.json and the console each hold the metadata as it was at the call: console 1`] = `
+"{"level":"info","message":"input","metadata":{"input":{}}}
+{"level":"info","message":"job.seen","metadata":{"job":{"status":"queued"}}}
+{"level":"info","message":"output.result","metadata":{"output":{"ok":true}}}
+{"level":"info","message":"output.files","metadata":{"log":"<testDir>/__tmp__/test/journey-mutate/<runId>/log.json","out":"<testDir>/__tmp__/test/journey-mutate/<runId>/out.json"}}"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command fires log calls without await, then mutates their metadata (cell 31) then: log.json and the console each hold the metadata as it was at the call: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {}
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "job.seen",
+  "metadata": {
+    "job": {
+      "status": "queued"
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.result",
+  "metadata": {
+    "output": {
+      "ok": true
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.files",
+  "metadata": {
+    "log": "<testDir>/__tmp__/test/journey-mutate/<runId>/log.json",
+    "out": "<testDir>/__tmp__/test/journey-mutate/<runId>/out.json"
+  }
+},
+]
+"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command logs after it has returned (cell 25) then: the late entry still lands in log.json, after the close bracket, and reaches the console: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {}
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.result",
+  "metadata": {
+    "output": {
+      "ok": true
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.files",
+  "metadata": {
+    "log": "<testDir>/__tmp__/test/journey-late/<runId>/log.json",
+    "out": "<testDir>/__tmp__/test/journey-late/<runId>/out.json"
+  }
+},
+]
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "late.entry",
+  "metadata": {
+    "step": 1
+  }
+},
+"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command logs at two levels, then returns then: the caller gets the output; the console, log.json, and out.json each hold the contract shape: console 1`] = `
+"{"level":"info","message":"input","metadata":{"input":{"name":"kai"}}}
+{"level":"info","message":"greet.began","metadata":{"name":"kai"}}
+{"level":"warn","message":"greet.slow","metadata":{"ms":1200}}
+{"level":"info","message":"output.result","metadata":{"output":{"greeted":"kai"}}}
+{"level":"info","message":"output.files","metadata":{"log":"<testDir>/__tmp__/test/journey-returns/<runId>/log.json","out":"<testDir>/__tmp__/test/journey-returns/<runId>/out.json"}}"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command logs at two levels, then returns then: the caller gets the output; the console, log.json, and out.json each hold the contract shape: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {
+      "name": "kai"
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "greet.began",
+  "metadata": {
+    "name": "kai"
+  }
+},
+{
+  "level": "warn",
+  "timestamp": "<timestamp>",
+  "message": "greet.slow",
+  "metadata": {
+    "ms": 1200
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.result",
+  "metadata": {
+    "output": {
+      "greeted": "kai"
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.files",
+  "metadata": {
+    "log": "<testDir>/__tmp__/test/journey-returns/<runId>/log.json",
+    "out": "<testDir>/__tmp__/test/journey-returns/<runId>/out.json"
+  }
+},
+]
+"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command logs at two levels, then returns then: the caller gets the output; the console, log.json, and out.json each hold the contract shape: out.json 1`] = `
+"{
+  "greeted": "kai"
+}"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command logs, then throws then: the caller gets the real error; log.json holds output.error with its name, message, and stack, then the close bracket; no out.json: console 1`] = `
+"{"level":"info","message":"input","metadata":{"input":{"name":"kai"}}}
+{"level":"info","message":"greet.began","metadata":{"name":"kai"}}
+{"level":"error","message":"output.error","metadata":{"error":{"name":"Error","message":"greeter offline","stack":"<stack>"}}}"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command logs, then throws then: the caller gets the real error; log.json holds output.error with its name, message, and stack, then the close bracket; no out.json: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {
+      "name": "kai"
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "greet.began",
+  "metadata": {
+    "name": "kai"
+  }
+},
+{
+  "level": "error",
+  "timestamp": "<timestamp>",
+  "message": "output.error",
+  "metadata": {
+    "error": {
+      "name": "Error",
+      "message": "greeter offline",
+      "stack": "<stack>"
+    }
+  }
+},
+]
+"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command returns undefined then: the caller gets undefined; out.json holds the word undefined: out.json 1`] = `"undefined"`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command throws a value that is not an Error then: the caller gets the same value; log.json holds it whole as output.error, sealed by the close bracket: console 1`] = `"{"level":"error","message":"output.error","metadata":{"error":{"code":"E_QUOTA","detail":"daily cap reached"}}}"`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command throws a value that is not an Error then: the caller gets the same value; log.json holds it whole as output.error, sealed by the close bracket: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {}
+  }
+},
+{
+  "level": "error",
+  "timestamp": "<timestamp>",
+  "message": "output.error",
+  "metadata": {
+    "error": {
+      "code": "E_QUOTA",
+      "detail": "daily cap reached"
+    }
+  }
+},
+]
+"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command throws an error that holds a circular ref, under a logger that stringifies metadata then: the caller gets the real error, never a TypeError from the logger; the console line and log.json mark the cycle and keep the message: console 1`] = `"{"level":"error","message":"output.error","metadata":{"error":{"name":"Error","message":"socket hang up","stack":"<stack>","request":{"self":"[Circular]"}}}}"`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command throws an error that holds a circular ref, under a logger that stringifies metadata then: the caller gets the real error, never a TypeError from the logger; the console line and log.json mark the cycle and keep the message: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {}
+  }
+},
+{
+  "level": "error",
+  "timestamp": "<timestamp>",
+  "message": "output.error",
+  "metadata": {
+    "error": {
+      "name": "Error",
+      "message": "socket hang up",
+      "stack": "<stack>",
+      "request": {
+        "self": "[Circular]"
+      }
+    }
+  }
+},
+]
+"
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: a command writes a nested out file, then returns a string then: the caller gets the string and the path; the file holds its bytes; out.json holds the string as is: out.json 1`] = `"saved reports/2026/summary.csv"`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: its require graph is walked from the package entry, as dpdm does then: no file in the graph requires bottleneck: prod packages 1`] = `
+[
+  "crypto",
+  "date-fns",
+  "fs",
+  "path",
+]
+`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: the run dir vanishes mid-run, under a logger that stringifies metadata (as local and aws-lambda do) then: the caller sees the failed append; the unawaited write rejects loud; the console line still holds the real error message: caller error 1`] = `"Error: ENOENT: no such file or directory, open '<testDir>/__tmp__/test/journey-append-fails/<runId>/log.json'"`;
+
+exports[`as-command (acceptance) given: the built package an adopter installs when: the run dir vanishes mid-run, under a logger that stringifies metadata (as local and aws-lambda do) then: the caller sees the failed append; the unawaited write rejects loud; the console line still holds the real error message: console 1`] = `"{"level":"error","message":"output.error","metadata":{"error":{"name":"Error","message":"bad record","stack":"<stack>"}}}"`;

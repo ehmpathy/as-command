@@ -1,0 +1,19 @@
+{
+  "key": "93c15ce47e0c0ff5",
+  "kind": "create",
+  "repo": {
+    "owner": "ehmpathy",
+    "name": "rhachet-roles-ehmpathy"
+  },
+  "exid": null,
+  "title": "git.stage.add: stage a tracked file removal",
+  "description": "# 🌙 dream: `git.stage.add` stages a tracked file's removal\n\n- kind: reseed (ehmpathy/rhachet-roles-ehmpathy, role=mechanic, skill `git.stage.add`)\n- owner: rhachet-roles-ehmpathy maintainers\n- caught 2026-11-14\n\n## .the cue that fired\n\nthe commit stone of `v2026_11_09.fix-drop-bottleneck-cycle`: the pnpm migration removes `package-lock.json`, and `rhx git.stage.add package-lock.json` refused with `file not found`.\n\n## .the gap, precisely\n\n- the path guard demands the file exist on disk, and exempts only a modify/delete merge conflict (`git ls-files -u`)\n- a plain tracked removal (`git status` shows ` D`) has no paved stage path: `git rm --cached` and `git add -u` are not pre-approved, and `git.commit.set --unstaged include` stages every change, which a bounded commit must not do\n- so a lockfile swap, a file rename by delete, or any dead-file cleanup cannot land through paved skills\n\n## .the shape of the fix\n\n- in the guard, also accept a path git tracks: `git ls-files --error-unmatch -- \"$abs_path\"` succeeds → the removal is real, stage it\n- `git add -- <path>` already records the removal for a tracked absent path, so the stage loop needs no change\n- clamp: an integration case that removes a tracked file and asserts `git diff --cached --name-status` shows `D <path>`; red before, green after\n\n## .why it is not done in this round\n\nthe skill belongs to rhachet-roles-ehmpathy, not this repo. the `package-lock.json` removal stays unstaged on this branch until the skill accepts it or a human stages it.",
+  "status": null,
+  "via": "gh.issues",
+  "auth": null,
+  "idem": "findsert",
+  "heldSeq": 1,
+  "recordStatus": "DELIVERED",
+  "reason": null,
+  "deliveredExid": "1331"
+}

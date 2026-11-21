@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`asCommand (integration) given: a command created with asCommand when: invoked with input then: it should execute the logic and persist logs and outputs to disk 1`] = `
+"{
+  "doubled": 42
+}"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic fires a log after the command has settled then: the console gets it, and the file holds it after \`]\` (cell 25: no seal guard, so the entry is never hidden) 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {}
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.result",
+  "metadata": {
+    "output": {
+      "ok": true
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.files",
+  "metadata": {
+    "log": "<testDir>/__tmp__/test/late-entry/<runId>/log.json",
+    "out": "<testDir>/__tmp__/test/late-entry/<runId>/out.json"
+  }
+},
+]
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "late.entry",
+  "metadata": {
+    "step": 1
+  }
+},
+"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic logs at every level, then returns a string then: log.json and out.json hold the contract shape: console 1`] = `
+"[
+  {
+    "level": "info",
+    "message": "input",
+    "metadata": {
+      "input": {
+        "name": "kai"
+      }
+    }
+  },
+  {
+    "level": "debug",
+    "message": "step.debug",
+    "metadata": {
+      "step": 1
+    }
+  },
+  {
+    "level": "info",
+    "message": "step.info",
+    "metadata": {
+      "step": 2
+    }
+  },
+  {
+    "level": "warn",
+    "message": "step.warn",
+    "metadata": {
+      "step": 3
+    }
+  },
+  {
+    "level": "error",
+    "message": "step.error",
+    "metadata": {
+      "step": 4
+    }
+  },
+  {
+    "level": "info",
+    "message": "output.result",
+    "metadata": {
+      "output": "hello kai"
+    }
+  },
+  {
+    "level": "info",
+    "message": "output.files",
+    "metadata": {
+      "log": "<testDir>/__tmp__/test/snapshot-returns/<runId>/log.json",
+      "out": "<testDir>/__tmp__/test/snapshot-returns/<runId>/out.json"
+    }
+  }
+]"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic logs at every level, then returns a string then: log.json and out.json hold the contract shape: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {
+      "name": "kai"
+    }
+  }
+},
+{
+  "level": "debug",
+  "timestamp": "<timestamp>",
+  "message": "step.debug",
+  "metadata": {
+    "step": 1
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "step.info",
+  "metadata": {
+    "step": 2
+  }
+},
+{
+  "level": "warn",
+  "timestamp": "<timestamp>",
+  "message": "step.warn",
+  "metadata": {
+    "step": 3
+  }
+},
+{
+  "level": "error",
+  "timestamp": "<timestamp>",
+  "message": "step.error",
+  "metadata": {
+    "step": 4
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.result",
+  "metadata": {
+    "output": "hello kai"
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "output.files",
+  "metadata": {
+    "log": "<testDir>/__tmp__/test/snapshot-returns/<runId>/log.json",
+    "out": "<testDir>/__tmp__/test/snapshot-returns/<runId>/out.json"
+  }
+},
+]
+"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic logs at every level, then returns a string then: log.json and out.json hold the contract shape: out.json 1`] = `"hello kai"`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic logs, then throws then: log.json holds the error entry, sealed by \`]\` 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {
+      "name": "kai"
+    }
+  }
+},
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "step.info",
+  "metadata": {
+    "step": 1
+  }
+},
+{
+  "level": "error",
+  "timestamp": "<timestamp>",
+  "message": "output.error",
+  "metadata": {
+    "error": {
+      "name": "Error",
+      "message": "bad record",
+      "stack": "<stack>"
+    }
+  }
+},
+]
+"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic returns undefined then: it should persist "undefined" to the output file 1`] = `"undefined"`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic throws a value that is not an Error then: the caller gets the same value, and log.json still holds it as output.error 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {}
+  }
+},
+{
+  "level": "error",
+  "timestamp": "<timestamp>",
+  "message": "output.error",
+  "metadata": {
+    "error": {
+      "code": "E_QUOTA",
+      "detail": "daily cap reached"
+    }
+  }
+},
+]
+"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic throws an error that carries a circular ref, under a logger that stringifies (cells 28, 41) then: the caller gets the real error; the console line and log.json each mark the cycle and keep the message: console 1`] = `"{"level":"error","message":"output.error","metadata":{"error":{"name":"Error","message":"upstream refused","stack":"<stack>","request":{"url":"/x","self":"[Circular]"}}}}"`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic throws an error that carries a circular ref, under a logger that stringifies (cells 28, 41) then: the caller gets the real error; the console line and log.json each mark the cycle and keep the message: log.json 1`] = `
+"[
+{
+  "level": "info",
+  "timestamp": "<timestamp>",
+  "message": "input",
+  "metadata": {
+    "input": {}
+  }
+},
+{
+  "level": "error",
+  "timestamp": "<timestamp>",
+  "message": "output.error",
+  "metadata": {
+    "error": {
+      "name": "Error",
+      "message": "upstream refused",
+      "stack": "<stack>",
+      "request": {
+        "url": "/x",
+        "self": "[Circular]"
+      }
+    }
+  }
+},
+]
+"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic uses context.out.write then: it should write custom output files to disk 1`] = `
+"name,greeting
+Alice,Hello Alice!"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic uses context.out.write with nested directories then: it should create nested directories and write the file: out.write artifact 1`] = `
+"{
+  "value": "test-data"
+}"
+`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the logic uses context.out.write with nested directories then: it should create nested directories and write the file: out.write path 1`] = `"<testDir>/__tmp__/test/nested-output/<runId>/reports/analytics/data.json"`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the run dir vanishes mid-run, the logic fires a log without await, then throws then: the caller gets the append failure in place of the logic error (the known edge of cell 8); a later command still writes its whole log: caller error 1`] = `"ENOENT: no such file or directory, open '<testDir>/__tmp__/test/append-fails-then-throw/<runId>/log.json'"`;
+
+exports[`asCommand (integration) given: a command created with asCommand when: the run dir vanishes mid-run, the logic fires a log without await, then throws then: the caller gets the append failure in place of the logic error (the known edge of cell 8); a later command still writes its whole log: console 1`] = `"{"level":"error","message":"output.error","metadata":{"error":{"name":"Error","message":"bad record","stack":"<stack>"}}}"`;

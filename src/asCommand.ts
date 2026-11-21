@@ -1,12 +1,11 @@
-import * as crypto from 'crypto';
-import { format } from 'date-fns';
 import * as fs from 'fs/promises';
 import { dirname } from 'path';
 import type { LogMethods } from 'simple-leveled-log-methods';
-import { genBottleneck } from 'with-bottleneck';
 
-// serialize log file appends, so concurrent log calls never interleave their json entries
-const bottleneckFileLog = genBottleneck({ concurrency: 1 });
+import { asJsonClone } from './asJsonClone';
+import { asOutFileContent } from './asOutFileContent';
+import { asRunId } from './asRunId';
+import { genRunLog } from './genRunLog';
 
 /**
  * context provided by the command
@@ -29,7 +28,7 @@ export interface CommandContext {
  *   - logs inputs, outputs, and errors to console
  *   - persists inputs, outputs, and errors to file storage (locally and optionally to s3)
  * - parallelism
- *   - supports parallel operations with progress reporting
+ *   - supports parallel operations with progress reports
  * - experience
  *   - easily pass in inputs from the command line
  */
@@ -45,40 +44,33 @@ export const asCommand =
     logic: (input: I, context: CommandContext) => Promise<O>,
   ) =>
   async (input: I): Promise<O> => {
-    const calledAt = new Date();
-
-    // define the log file directory and name
-    const inputHash = crypto
-      .createHash('sha256')
-      .update(JSON.stringify(input))
-      .digest('hex');
-    const runId = `${format(calledAt, 'yyyyMMdd.HHmmss')}.${inputHash}`;
+    // define the run directory and its files
+    const runId = asRunId({ calledAt: new Date(), input });
     const logFileDirectory = `${options.dir}/__tmp__/${options.stage}/${options.name}/${runId}`;
-    const logFileName = `log.json`;
-    const outFileName = `out.json`;
+    const logFilePath = `${logFileDirectory}/log.json`;
+    const outFilePath = `${logFileDirectory}/out.json`;
+    const runLog = genRunLog({ path: logFilePath });
 
-    // find or create the temp log table
+    // find or create the run directory
     await fs.mkdir(logFileDirectory, {
       recursive: true,
     });
 
-    // define how to log something
+    // define how to log an entry; emit and stamp at call time, then append to this run's log
     const logLevelAbstraction = async (
       level: keyof LogMethods,
       message: string,
       metadata?: any,
-    ) =>
-      bottleneckFileLog.schedule(async () => {
-        options.log[level](message, metadata);
-        return fs.appendFile(
-          `${logFileDirectory}/${logFileName}`,
-          `${JSON.stringify(
-            { level, timestamp: new Date().toISOString(), message, metadata },
-            null,
-            2,
-          )},\n`,
-        );
+    ) => {
+      // the console gets the same total render as the file, so a logger that stringifies never loses or throws on it
+      options.log[level](message, asJsonClone({ value: metadata }));
+      return runLog.append({
+        level,
+        timestamp: new Date().toISOString(),
+        message,
+        metadata,
       });
+    };
 
     // define the wrapped logger
     const log: LogMethods = {
@@ -92,8 +84,8 @@ export const asCommand =
         logLevelAbstraction('error', message, metadata),
     };
 
-    // log the inputs
-    await fs.appendFile(`${logFileDirectory}/${logFileName}`, '[\n');
+    // open the log file, then log the inputs
+    await runLog.open();
     await log.info('input', { input });
 
     try {
@@ -114,32 +106,21 @@ export const asCommand =
       await log.info('output.result', { output });
 
       // save the output
-      await fs.appendFile(
-        `${logFileDirectory}/${outFileName}`,
-        typeof output === 'string'
-          ? output
-          : JSON.stringify(output, null, 2) || 'undefined',
-      );
+      await fs.appendFile(outFilePath, asOutFileContent({ output }));
 
       // log out where the user can find them
-      await log.info('output.files', {
-        log: `${logFileDirectory}/${logFileName}`,
-        out: `${logFileDirectory}/${outFileName}`,
-      });
+      await log.info('output.files', { log: logFilePath, out: outFilePath });
 
       // return the output
       return output;
     } catch (error) {
-      if (!(error instanceof Error)) throw error;
-
-      // log the error
-      await log.error('output.error', {
-        error: { ...error, message: error.message },
-      });
+      // log whatever was thrown, whole: an Error renders as its name, message, stack, and own props
+      await log.error('output.error', { error });
 
       // rethrow the error
       throw error;
     } finally {
-      await fs.appendFile(`${logFileDirectory}/${logFileName}`, ']\n');
+      // seal the log file, after every entry queued before it
+      await runLog.seal();
     }
   };
