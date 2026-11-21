@@ -1,0 +1,19 @@
+{
+  "key": "ae957c30c86f5c36",
+  "kind": "create",
+  "repo": {
+    "owner": "ehmpathy",
+    "name": "rhachet-roles-ehmpathy"
+  },
+  "exid": null,
+  "title": "git.branch.rebase: a paved verb to reword a commit on an unmerged branch",
+  "description": "# 🌙 dream: a paved verb rewords a commit on an unmerged branch\n\n- kind: reseed (ehmpathy/rhachet-roles-ehmpathy, role=mechanic, `git.branch.rebase` or a peer)\n- owner: rhachet-roles-ehmpathy maintainers\n- caught 2026-11-14\n\n## .the cue that fired\n\npr #9 (ehmpathy/as-command): commit 3 `docs(route)` fails the practice commitlint (`docs` is not in its type-enum). the director approved a reword via the paved rebase and push verbs; none of them rewords.\n\n## .the gap, precisely\n\n- `git.branch.rebase` only rebases onto origin/main (begin, continue, take, abort, lock)\n- `git.branch.cutover` replays picked commits unchanged onto a new branch, so the result is a new pr, not a rewrite of the open one\n- `git.commit.push` never force-pushes, so even a local reword could not reach the open pr\n\n## .the shape of the fix\n\n- `rhx git.branch.rebase reword --sha <sha> --message @stdin [--mode plan|apply]`: replay the branch from the sha's parent with only that message changed. refuse a sha on origin/main or under a tag\n- push it with `--force-with-lease` against the sha it read, and only for a branch with no merged history\n- clamp: a temp repo with 3 commits; reword the middle; assert the tree hashes are the same and only that message changed\n\n## .why it is not done in this round\n\nthe skill belongs to rhachet-roles-ehmpathy. #9 stays red on test-commits until a reword lands.",
+  "status": null,
+  "via": "gh.issues",
+  "auth": null,
+  "idem": "findsert",
+  "heldSeq": 2,
+  "recordStatus": "DELIVERED",
+  "reason": null,
+  "deliveredExid": "1332"
+}
