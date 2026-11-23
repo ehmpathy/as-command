@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`npm trusted publisher (integration) given: [case1] the repo at HEAD when: [t0] the trusted-publisher facts are derived from its files then: the facts match the snapshot 1`] = `
+{
+  "anchors": {
+    "callerCount": 1,
+    "callerNeeds": [
+      "test",
+    ],
+    "callerTags": [
+      "v*",
+    ],
+    "idTokenWrite": {
+      "caller": "write",
+      "publishJob": "write",
+    },
+    "idempotifyIf": "steps.publish.outcome == 'failure'",
+    "publishContinueOnError": true,
+    "publishStepOrder": [
+      "verify oidc auth",
+      "verify oidc compat",
+      "build",
+      "publish",
+      "idempotify",
+    ],
+  },
+  "record": {
+    "environment": null,
+    "organization": "ehmpathy",
+    "repository": "as-command",
+    "workflowFilename": "publish.yml",
+  },
+  "runtime": {
+    "nodeVersion": "v22.21.0",
+  },
+}
+`;
+
+exports[`npm trusted publisher (integration) given: [case2] a repo where two workflows call the reusable publish when: [t0] the trusted-publisher facts are derived then: the message lists both callers and names which to keep, per the snapshot 1`] = `
+"✋ ConstraintError: more than one workflow calls the reusable publish; the npm trusted-publisher record names one caller file
+
+{
+  "reusableWorkflow": "./.github/workflows/.publish-npm.yml",
+  "callers": [
+    "publish.yml",
+    "publish2.yml"
+  ],
+  "hint": "keep the caller whose filename matches the npm record's Workflow filename on npmjs.com; remove the others"
+}"
+`;
+
+exports[`npm trusted publisher (integration) given: [case3] a repo where no workflow calls the reusable publish when: [t0] the trusted-publisher facts are derived then: the message says to restore the caller, per the snapshot 1`] = `
+"✋ ConstraintError: no workflow calls the reusable publish; the npm trusted-publisher record names one caller file
+
+{
+  "reusableWorkflow": "./.github/workflows/.publish-npm.yml",
+  "callers": [],
+  "hint": "restore the caller workflow named in the npm record's Workflow filename (publish.yml unless changed on npmjs.com)"
+}"
+`;
+
+exports[`npm trusted publisher (integration) given: [case4] the live npm registry when: [t0] the package document is fetched then: the document matches the snapshot, its per-release fields masked 1`] = `
+{
+  "body": {
+    "dist-tags": "<volatile object>",
+    "name": "@ehmpathy/as-command",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/ehmpathy/as-command.git",
+    },
+    "time": "<volatile object>",
+    "versions": "<volatile object>",
+  },
+  "status": 200,
+}
+`;
+
+exports[`npm trusted publisher (integration) given: [case4] the live npm registry when: [t1] the oidc exchange is asked with no github oidc token then: the registry's own refusal words match the snapshot 1`] = `
+{
+  "body": {
+    "message": "OIDC token exchange error - Authorization header is required",
+  },
+  "status": 400,
+}
+`;
+
+exports[`npm trusted publisher (integration) given: [case4] the live npm registry when: [t2] the oidc exchange is asked with a bearer token github did not mint then: the registry's own refusal words match the snapshot 1`] = `
+{
+  "body": {
+    "message": "OIDC token exchange error - unauthorized",
+  },
+  "status": 401,
+}
+`;
+
+exports[`npm trusted publisher (integration) given: [case7] a repo whose package.json#repository is not on github when: [t0] the trusted-publisher facts are derived then: the message names the shapes npm accepts, per the snapshot 1`] = `
+"✋ ConstraintError: package.json#repository does not name a github org and repo
+
+{
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ehmpathy/as-command.git"
+  },
+  "hint": "set repository to \\"org/repo\\" or { \\"type\\": \\"git\\", \\"url\\": \\"git+https://github.com/org/repo.git\\" }"
+}"
+`;

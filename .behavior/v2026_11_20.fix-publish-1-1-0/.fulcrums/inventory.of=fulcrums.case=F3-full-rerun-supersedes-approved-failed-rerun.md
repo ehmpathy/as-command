@@ -1,0 +1,9 @@
+# F3 — the approved vision's rerun step changes from `--failed` to a full rerun
+
+- **the fork**: the vision the director approved says `gh run rerun 44309703170 --failed`. a peer lane at 5.1 (r010, enroll-impl-behavior-intent; r011 concurs) showed `--failed` skips the install job, and the publish job restores node_modules from a cache with no fallback install. the alternatives: keep the approved text and add a ~7-day bound, or change the ask to a full rerun
+- **taken**: change the ask to `gh run rerun 44309703170` in the vision yield, `case=1`, the catalog (a rerun-scope cross-cut), the execution yield, and the pr body. a full rerun works at any date inside the 30-day window; a bound would expire ~2026-11-25, before the commander may reach the ask
+- **rework**: clean. a one-flag text change, with no code and no caller built on it
+- **confidence**: 96%. verified: `.install.yml` installs on a cache miss (`node-modules cache miss install`), and `.publish-npm.yml` restores with no `fail-on-cache-miss` and no install step. the residual: a full rerun also reruns the `test` job, which passed before; a flake there would need one more rerun
+- **where**: `1.vision.yield.md` step 2; `1.vision.experience.case=1.*.md` [t2]; `1.vision.experience.case=_.md` rerun scope; `5.1.execution.from_vision.yield.md`; `5.1.execution.pr-body.md`
+- **no pushback footnote**: the `--failed` text was this work's own draft, revised in place, not a prior decision this work pushes back on. the wish's footnote names a decision made elsewhere (a path, a pr, a brief) before this work; a line on this work's own revision would narrate its drafts (`rule.forbid.chronological-accretion`)
+- **verdict**: open for the director, who approved the prior text and holds the fleet.asks entry that must carry the same change
